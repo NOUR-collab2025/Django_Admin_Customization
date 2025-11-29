@@ -58,6 +58,7 @@ class CustomAdminSite(AdminSite):
     
 
 
+
 # ------------------- Inline ArticleCommande -------------------
 class ArticleCommandeInlineFormSet(BaseInlineFormSet):
     def clean(self):
