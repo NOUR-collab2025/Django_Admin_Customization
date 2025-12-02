@@ -8,8 +8,8 @@ from django.contrib.admin import widgets
 from django.shortcuts import render
 from django.db import models
 from django.db.models import Count 
-from django.contrib.auth.models import User, Group
-from django.contrib.auth.admin import UserAdmin, GroupAdmin
+
+
 
 from .models import Client, Produit, Categorie, Commande, ArticleCommande
 
@@ -107,6 +107,35 @@ class CommandeAdmin(admin.ModelAdmin):
         )
     articles_affiches.short_description = "Articles"
 
+    def mark_as_expedie(self, request, queryset):
+        queryset.update(statut='expedie')
+        self.message_user(request, f"{queryset.count()} commande(s) marquée(s) comme expédiée(s).")
+    mark_as_expedie.short_description = "Marquer les commandes sélectionnées comme expédié"
+
+    # Action pour marquer plusieurs commandes comme "terminé"
+    def mark_as_termine(self, request, queryset):
+        queryset.update(statut='termine')
+        self.message_user(request, f"{queryset.count()} commande(s) marquée(s) comme terminée(s).")
+    mark_as_termine.short_description = "Marquer les commandes sélectionnées comme terminé"
+
+    def mark_as_en_attente(self, request, queryset):
+        queryset.update(statut='en attente')
+        self.message_user(request, f"{queryset.count()} commande(s) marquée(s) comme en attente.")
+    mark_as_en_attente.short_description= "Marquer les commandes sélectionnées comme en attente"
+
+    def mark_as_annule(self, request, queryset):
+        queryset.update(statut='annulé')
+        self.message_user(request, f"{queryset.count()} commande(s) marquée(s) comme annulée(s).")
+    mark_as_annule.short_description= "Marquer les commandes sélectionnées comme annulé"
+
+    def mark_as_en_cours(self, request, queryset):
+        queryset.update(statut='en cours')
+        self.message_user(request, f"{queryset.count()} commande(s) marquée(s) comme en cours.")
+    mark_as_en_cours.short_description= "Marquer les commandes sélectionnées comme en cours"
+
+    # Ajouter les actions dans la liste d'actions disponibles
+    actions = ['mark_as_expedie', 'mark_as_termine', 'mark_as_en_attente', 'mark_as_annule', 'mark_as_en_cours']
+
 
 # -----------------------------------------
 # Produit Admin
@@ -145,6 +174,19 @@ class ProduitAdmin(admin.ModelAdmin):
         return format_html('<img id="img-preview" width="150" style="display:none;" />')
 
     image_preview.short_description = 'Aperçu'
+
+    def mark_as_active(self, request, queryset):
+        queryset.update(actif=True)  # Change le champ 'actif' de tous les objets sélectionnés
+        self.message_user(request, f"{queryset.count()} produit(s) marqué(s) comme actif(s).")
+    mark_as_active.short_description = "Marquer les produits sélectionnés comme actif"
+
+    def mark_as_inactive(self, request, queryset):
+        queryset.update(actif=False)
+        self.message_user(request, f"{queryset.count()} produit(s) marqué(s) comme inactif(s).")
+    mark_as_inactive.short_description = "Marquer les produits sélectionnés comme inactif"
+
+    # Ajouter les actions dans la liste d'actions disponibles
+    actions = ['mark_as_active', 'mark_as_inactive']
 
 
 # -----------------------------------------
