@@ -14,12 +14,11 @@ Objectifs principaux :
 
 ### Tableau de bord personnalisé
 - Affichage des statistiques : nombre de clients, produits et commandes.  
-- Graphiques interactifs pour visualiser les commandes par statut.  
--
+- Graphiques interactifs pour visualiser les commandes par statut.
 
 
 ## Crédits
 
 Projet développé par Hanene Trigui - Dagdagui Ghada - Saidani Nour
 
-Ce projet a été proposé par notre Professeur MR Chaouki Bayoudhi au cours de notre cours service Oriented Architecture
+Ce projet a été proposé par notre Professeur MR Chaouki Bayoudhi au cours de notre cours service Oriented Architecture à l'Institut Supérieur de Gestion de Tunis.
